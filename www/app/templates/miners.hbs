@@ -1,0 +1,38 @@
+<div class="m-content">
+
+    <h3>Total hashrate: <span class="m--font-boldest">{{format-hashrate model.hashrate}}</span></h3>
+    <h4>Total miners: <span class="m--font-success m--font-boldest">{{model.minersTotal}}</span></h4>
+    <div class="input-group" style="margin-top: 20px;">
+        {{input value=cachedLogin class="form-control m-input m-input--air" placeholder="Enter Your Wallet Address"}}
+        <span class="input-group-btn">
+                                <button class="btn m-btn m-btn--gradient-from-primary m-btn--gradient-to-info" type="button" {{action 'lookup' cachedLogin}}>
+                                  <span style="display: inline;"><i class="fa fa-search"></i> Lookup</span>
+                                </button>
+                            </span>
+    </div>
+<br>
+  {{#if model.miners}}
+  <div class="table-responsive">
+    <table class="table m-table table-condensed table-striped">
+      <thead>
+        <tr>
+          <th>Login</th>
+          <th>Hashrate</th>
+          <th>Last Beat</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each model.miners as |m|}}
+        <tr class="{{if m.offline "m-table__row--warning"}}">
+          <td><h5>{{#link-to 'account' m.login class='hash'}}{{m.login}}{{/link-to}}</h5></td>
+          <td><h5>{{format-hashrate m.hr}}</h5></td>
+          <td>{{format-date-locale m.lastBeat}}</td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+  {{else}}
+  <h3>No miners</h3>
+  {{/if}}
+</div>

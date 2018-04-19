@@ -1,0 +1,43 @@
+<div class="m-content">
+    <div class="m-portlet m-portlet--bordered-semi m-portlet--space">
+        <div class="m-portlet__body">
+            <div class="m-widget25">
+                <span class="m-widget25__price m--font-brand">{{model.paymentsTotal}}</span>
+                <span class="m-widget25__desc">Total Payments Sent</span>
+            </div>
+        </div>
+    </div>
+
+  {{#if model.payments}}
+  <h4>Latest Payouts</h4>
+  <div class="table-responsive">
+    <table class="table table-condensed table-striped">
+      <thead>
+        <tr>
+          <th>Time</th>
+          <th>Amount</th>
+          <th>Address</th>
+          <th>Tx ID</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each model.payments as |tx|}}
+          <tr>
+            <td>{{format-date-locale tx.timestamp}}</td>
+            <td>{{format-number tx.formatAmount}}</td>
+            <td>
+              <a href="/#/account/{{tx.address}}/payouts" class="hash">{{tx.address}}</a>
+            </td>
+            <td>
+              <a href="{{format-explorer 'tx' tx.tx}}" class="hash" rel="nofollow" target="_blank">{{tx.tx}}</a>
+            </td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+  {{else}}
+  <h3>No payouts yet</h3>
+  {{/if}}
+
+</div>
