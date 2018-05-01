@@ -2,8 +2,6 @@
 	"threads": 2,
 	"coin": "eth",
 	"name": "main",
-	"pplns": 1000,
-    "coin-name":"ETH",
 
 	"proxy": {
 		"enabled": true,
@@ -11,7 +9,7 @@
 		"limitHeadersSize": 1024,
 		"limitBodySize": 256,
 		"behindReverseProxy": false,
-		"blockRefreshInterval": "300ms",
+		"blockRefreshInterval": "120ms",
 		"stateUpdateInterval": "3s",
 		"difficulty": 2000000000,
 		"hashrateExpiration": "3h",
@@ -84,7 +82,7 @@
 
 	"redis": {
 		"endpoint": "127.0.0.1:6379",
-		"poolSize": 100,
+		"poolSize": 10,
 		"database": 0,
 		"password": ""
 	},
@@ -115,14 +113,6 @@
 		"threshold": 500000000,
 		"bgsave": false
 	},
-
-	"exchange": {
-		"enabled": true,
-		"name": "ETH_INR",
-		"url": "https://ethexindia.com/api/",
-		"timeout": "10s",
-		"refreshInterval": "120s"
-		},
 
 	"newrelicEnabled": false,
 	"newrelicName": "MyEtherProxy",

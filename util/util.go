@@ -6,10 +6,6 @@ import (
 	"strconv"
 	"time"
 
-	"net/smtp"
-	"log"
-	"bytes"
-
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/common/math"
 )
@@ -84,30 +80,25 @@ func String2Big(num string) *big.Int {
 	return n
 }
 
-func SendMail(mail, login, worker string) {
-
-	msg := "Subject: POOL - Inactive worker notification\n\n HI,\t" + login + "\n It looks like the following worker(s) became inactive:\n\n" + worker
-
-	c, err := smtp.Dial("localhost:25")
-	if err != nil {
-		log.Fatal(err)
-	}
-	defer c.Close()
-
-	// Set the sender and recipient.
-	c.Mail("no-reply@host_pool")
-	c.Rcpt(mail)
-	c.Hello("host_pool")
-
-	// Send the email body
-	wc, err := c.Data()
-	if err != nil {
-		log.Fatal(err)
-	}
-	defer wc.Close()
-
-	buf := bytes.NewBufferString(msg)
-	if _, err = buf.WriteTo(wc); err != nil {
-	log.Fatal(err)
-	}
+// for NiceHash...
+// fixme: rounding error causes invalid shares
+func DiffToTarget(diff float64) (target *big.Int) {
+    mantissa := 0x0000ffff / diff
+    exp := 1
+    tmp := mantissa
+    for tmp >= 256.0 {
+        tmp /= 256.0
+        exp++
+    }
+    for i := 0; i < exp; i++ {
+        mantissa *= 256.0
+    }
+    target = new(big.Int).Lsh(big.NewInt(int64(mantissa)), uint(26-exp)*8)
+    return
 }
+
+func DiffFloatToDiffInt(diffFloat float64) (diffInt *big.Int) {
+    target := DiffToTarget(diffFloat)
+    return new(big.Int).Div(pow256, target)
+}
+

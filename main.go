@@ -11,11 +11,10 @@ import (
 
 	"github.com/yvasiyarov/gorelic"
 
-	"github.com/techievee/open-ethereum-pool/api"
-	"github.com/techievee/open-ethereum-pool/payouts"
-	"github.com/techievee/open-ethereum-pool/proxy"
-	"github.com/techievee/open-ethereum-pool/storage"
-	"github.com/techievee/open-ethereum-pool/exchange"
+	"github.com/EtherFact-Project/open-etherfact-pool/api"
+	"github.com/EtherFact-Project/open-etherfact-pool/payouts"
+	"github.com/EtherFact-Project/open-etherfact-pool/proxy"
+	"github.com/EtherFact-Project/open-etherfact-pool/storage"
 )
 
 var cfg proxy.Config
@@ -40,14 +39,6 @@ func startPayoutsProcessor() {
 	u := payouts.NewPayoutsProcessor(&cfg.Payouts, backend)
 	u.Start()
 }
-
-
-func startExchangeProcessor() {
-	u := exchange.StartExchangeProcessor(&cfg.Exchange, backend)
-	u.Start()
-}
-
-
 
 func startNewrelic() {
 	if cfg.NewrelicEnabled {
@@ -89,11 +80,10 @@ func main() {
 
 	startNewrelic()
 
-	backend = storage.NewRedisClient(&cfg.Redis, cfg.Coin, cfg.Pplns, cfg.CoinName)
+	backend = storage.NewRedisClient(&cfg.Redis, cfg.Coin)
 	pong, err := backend.Check()
 	if err != nil {
 		log.Printf("Can't establish connection to backend: %v", err)
-                //os.Exit(0)
 	} else {
 		log.Printf("Backend check reply: %v", pong)
 	}
@@ -110,11 +100,6 @@ func main() {
 	if cfg.Payouts.Enabled {
 		go startPayoutsProcessor()
 	}
-
-	if cfg.Exchange.Enabled {
-		go startExchangeProcessor()
-	}
-
 	quit := make(chan bool)
 	<-quit
 }

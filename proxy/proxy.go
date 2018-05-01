@@ -13,10 +13,10 @@ import (
 
 	"github.com/gorilla/mux"
 
-	"github.com/techievee/open-ethereum-pool/policy"
-	"github.com/techievee/open-ethereum-pool/rpc"
-	"github.com/techievee/open-ethereum-pool/storage"
-	"github.com/techievee/open-ethereum-pool/util"
+	"github.com/EtherFact-Project/open-etherfact-pool/policy"
+	"github.com/EtherFact-Project/open-etherfact-pool/rpc"
+	"github.com/EtherFact-Project/open-etherfact-pool/storage"
+	"github.com/EtherFact-Project/open-etherfact-pool/util"
 )
 
 type ProxyServer struct {
@@ -34,7 +34,6 @@ type ProxyServer struct {
 	sessionsMu         sync.RWMutex
 	sessions           map[*Session]struct{}
 	timeout            time.Duration
-	Extranonce         string
 }
 
 type jobDetails struct {
@@ -52,7 +51,8 @@ type Session struct {
 	conn  *net.TCPConn
 	login string
 	subscriptionID string
-	JobDeatils jobDetails
+	Extranonce         string
+	JobDetails jobDetails
 }
 
 func NewProxy(cfg *Config, backend *storage.RedisClient) *ProxyServer {
@@ -237,7 +237,7 @@ func (cs *Session) handleMessage(s *ProxyServer, r *http.Request, req *JSONRpcRe
 		return
 	}
 	if !s.policy.ApplyLoginPolicy(login, cs.ip) {
-		errReply := &ErrorReply{Code: -1, Message: "You are blacklisted, please contact helpdesk with your details"}
+		errReply := &ErrorReply{Code: -1, Message: "You are blacklisted"}
 		cs.sendError(req.Id, errReply)
 		return
 	}

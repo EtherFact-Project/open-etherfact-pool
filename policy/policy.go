@@ -9,9 +9,8 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/techievee/open-ethereum-pool/storage"
-	"github.com/techievee/open-ethereum-pool/util"
-
+	"github.com/EtherFact-Project/open-etherfact-pool/storage"
+	"github.com/EtherFact-Project/open-etherfact-pool/util"
 )
 
 type Config struct {
@@ -202,8 +201,8 @@ func (s *PolicyServer) ApplyLimitPolicy(ip string) bool {
 	return true
 }
 
-func (s *PolicyServer) ApplyLoginPolicy(login, ip string) bool {
-	if s.InBlackList(login) {
+func (s *PolicyServer) ApplyLoginPolicy(addy, ip string) bool {
+	if s.InBlackList(addy) {
 		x := s.Get(ip)
 		s.forceBan(x, ip)
 		return false
@@ -225,7 +224,6 @@ func (s *PolicyServer) ApplySharePolicy(ip string, validShare bool) bool {
 	x := s.Get(ip)
 	x.Lock()
 
-	//TODO: Remove banning for invalid shares(Apply limit)
 	if validShare {
 		x.ValidShares++
 		if s.config.Limits.Enabled {
@@ -248,7 +246,6 @@ func (s *PolicyServer) ApplySharePolicy(ip string, validShare bool) bool {
 	ratio := invalidShares / validShares
 
 	if ratio >= s.config.Banning.InvalidPercent/100.0 {
-		//TODO: Remove IP Banning
 		s.forceBan(x, ip)
 		return false
 	}
@@ -287,10 +284,10 @@ func (x *Stats) decrLimit() int32 {
 	return atomic.AddInt32(&x.ConnLimit, -1)
 }
 
-func (s *PolicyServer) InBlackList(login string) bool {
+func (s *PolicyServer) InBlackList(addy string) bool {
 	s.RLock()
 	defer s.RUnlock()
-	return util.StringInSlice(login, s.blacklist)
+	return util.StringInSlice(addy, s.blacklist)
 }
 
 func (s *PolicyServer) InWhiteList(ip string) bool {
@@ -302,31 +299,16 @@ func (s *PolicyServer) InWhiteList(ip string) bool {
 func (s *PolicyServer) doBan(ip string) {
 	set, timeout := s.config.Banning.IPSet, s.config.Banning.Timeout
 	cmd := fmt.Sprintf("sudo ipset add %s %s timeout %v -!", set, ip, timeout)
-	/*out, err := exec.Command(ipsetPath, "add", s.Name, entry, "timeout", strconv.Itoa(timeout), "-exist").CombinedOutput()
-	if err != nil {
-		return fmt.Errorf("error adding entry %s: %v (%s)", entry, err, out)
-	}
-*/
-
 	args := strings.Fields(cmd)
 	head := args[0]
 	args = args[1:]
 
 	log.Printf("Banned %v with timeout %v on ipset %s", ip, timeout, set)
 
-
-	cmdo := exec.Command(head, args...)
-	output, err := cmdo.CombinedOutput()
+	_, err := exec.Command(head, args...).Output()
 	if err != nil {
-		log.Println("COMMAND OUTPUT :" + fmt.Sprint(err) + ": " + string(output))
-	} else {
-		log.Println("COMMAND OUTPUT :" + string(output))
-	}
-
-	/*if err != nil {
 		log.Printf("CMD Error: %s", err)
-		fmt.Println(fmt.Sprint(err) + ": " + err.String())
-	}*/
+	}
 }
 
 func (x *Stats) heartbeat() {

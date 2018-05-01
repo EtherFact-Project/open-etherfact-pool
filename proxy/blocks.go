@@ -9,8 +9,8 @@ import (
 
 	"github.com/ethereum/go-ethereum/common"
 
-	"github.com/techievee/open-ethereum-pool/rpc"
-	"github.com/techievee/open-ethereum-pool/util"
+	"github.com/EtherFact-Project/open-etherfact-pool/rpc"
+	"github.com/EtherFact-Project/open-etherfact-pool/util"
 )
 
 const maxBacklog = 3
@@ -91,8 +91,10 @@ func (s *ProxyServer) fetchBlockTemplate() {
 	log.Printf("New block to mine on %s at height %d / %s", rpc.Name, height, reply[0][0:10])
 
 	// Stratum
+	// BUG: NiceHash jobs shouldn't be sent as Stratum and vice versa
+	// for now I'm only interested in NiceHash and don't have time or any interest to fix it.
 	if s.config.Proxy.Stratum.Enabled {
-		go s.broadcastNewJobs()
+		//go s.broadcastNewJobs()
 	}
 
 	if s.config.Proxy.StratumNiceHash.Enabled{

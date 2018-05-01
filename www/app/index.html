@@ -4,41 +4,33 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Pirl (PIRL) Mining Pool PIRL.ALTpool.pro</title>
-    <meta name="description" content="High profitability Pirl PIRL mining pool with 0.5% fee only."/>
-    <meta name="keywords" content="pirl, PIRL, pool, mining, cryptocurrency"/>
-    <meta name="google-site-verification" content="X5D-keKUOFwLk-4n1WIL2CT5ScIZnk-VucqQ39zqWj8" />
-
-    <link rel="icon" type="image/png" href="favicon.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="manifest" href="/manifest.json">
-    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
-    <meta name="theme-color" content="#ffffff">
-    <link href="//fonts.googleapis.com/css?family=Poppins:300,400,500,600,700|Roboto:300,400,500,700" rel="stylesheet">
-
+    <title>Ethereum Mining Pool</title>
+	<meta property="og:type" content="website" />
+    <meta name="description" content="High profitability Ethereum mining pool"/>
+    <meta name="keywords" content="ethereum, pool, mining, cryptocurrency, EtherFact, ETHF, Ethereum Fact, Ethereum fork, ethereum, ethash, mining, altcoin, pow, block reward, dagger, fact, eth, etf, etc, exp, vietnam, coin, btc, bitcoin, monero, pool"/>
+	<meta property="og:image" content="https://raw.githubusercontent.com/etherfact/etherfact.github.io/master/images/anh1.jpg" />
+	<meta property="og:site_name" content="EtherFact Mining Pool" />
+	<meta property="og:title" content="EtherFact Mining Pool" />
+    <script src="https://cdn.polyfill.io/v1/polyfill.min.js?features=Intl.~locale.en"></script>
     {{content-for "head"}}
-
-    <link href="/assets/css/vendors.bundle.css" rel="stylesheet" type="text/css" />
-    <link href="/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="{{rootURL}}assets/vendor.css">
+    <link rel="stylesheet" href="{{rootURL}}assets/open-ethereum-pool.css">
     {{content-for "head-footer"}}
   </head>
+  <body>
+    {{content-for "body"}}
 
+    <script src="{{rootURL}}assets/vendor.js"></script>
+    <script src="{{rootURL}}assets/open-ethereum-pool.js"></script>
 
-  <!-- begin::Body -->
-  <body style="background-image: url(/assets/img/bg.jpg)"  class="m-page--boxed m--skin- m-content--skin-light m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-light m-aside-left--offcanvas m-aside-left--hide m-footer--push m-aside--offcanvas-default"  >
+    {{content-for "body-footer"}}
 
-        {{content-for "body"}}
-
-        <script src="/assets/vendor.js"></script>
-        <script src="/assets/open-ethereum-pool.js"></script>
-        <script src="/assets/js/vendors.bundle.js" type="text/javascript"></script>
-        <script src="/assets/js/scripts.bundle.js" type="text/javascript"></script>
-
-        {{content-for "body-footer"}}
-  
+    <footer class="footer">
+      <div class="container">
+        <p class="text-muted">&copy; EtherFact Pool |
+          Powered by <a href="https://github.com/EtherFact-Project/open-etherfact-pool" target="_blank">open-ethereum-pool</a>
+        </p>
+      </div>
+    </footer>
   </body>
-  <!-- end::Body -->
-
 </html>

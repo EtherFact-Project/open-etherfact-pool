@@ -4,9 +4,7 @@ module.exports = function(environment) {
   var ENV = {
     modulePrefix: 'open-ethereum-pool',
     environment: environment,
-    baseURL: '/',
     rootURL: '/',
-
     locationType: 'hash',
     EmberENV: {
       FEATURES: {
@@ -16,35 +14,23 @@ module.exports = function(environment) {
     },
 
     APP: {
-
-      COIN: 'PIRL',
-      CoinName: 'Pirl',
-      PPLNS: '3000',
-      blocksMature: '60',
-
       // API host and port
-      ApiUrl: '//pirl.altpool.pro/',
+      ApiUrl: '//127.0.0.1:8080/',
 
       // HTTP mining endpoint
-      HttpHost: 'http://pirl.altpool.pro',
-      HttpPort: 7473,
+      HttpHost: 'http://127.0.0.1',
+      HttpPort: 8888,
 
       // Stratum mining endpoint
-      StratumHost: 'pirl.altpool.pro',
-      StratumPort: 7475,
-
-      // Stratum Nicehash mining endpoint
-      StratumHostNH: 'pirl.altpool.pro',
-      StratumPortNH: 7477,
-
-      StratumWallet: '0x07aaf3f658bc5e32334f63e39850d73c99b154cb',
+      StratumHost: '127.0.0.1',
+      StratumPort: 8008,
 
       // Fee and payout details
-      PoolFee: '0.5%',
-      PayoutThreshold: '1',
+      PoolFee: '0%',
+      PayoutThreshold: '0.5 Ether',
 
       // For network hashrate (change for your favourite fork)
-      BlockTime: 15.88
+      BlockTime: 14.4
     }
   };
 
@@ -52,7 +38,7 @@ module.exports = function(environment) {
     /* Override ApiUrl just for development, while you are customizing
       frontend markup and css theme on your workstation.
     */
-    ENV.APP.ApiUrl = 'http://localhost:8098/'
+    ENV.APP.ApiUrl = 'http://localhost:8080/'
     // ENV.APP.LOG_RESOLVER = true;
     // ENV.APP.LOG_ACTIVE_GENERATION = true;
     // ENV.APP.LOG_TRANSITIONS = true;
@@ -62,7 +48,6 @@ module.exports = function(environment) {
 
   if (environment === 'test') {
     // Testem prefers this...
-    ENV.baseURL = '/';
     ENV.locationType = 'none';
 
     // keep test console output quieter

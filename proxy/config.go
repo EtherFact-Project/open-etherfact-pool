@@ -1,12 +1,10 @@
 package proxy
 
 import (
-	"github.com/techievee/open-ethereum-pool/api"
-	"github.com/techievee/open-ethereum-pool/payouts"
-	"github.com/techievee/open-ethereum-pool/policy"
-	"github.com/techievee/open-ethereum-pool/storage"
-	"github.com/techievee/open-ethereum-pool/exchange"
-
+	"github.com/EtherFact-Project/open-etherfact-pool/api"
+	"github.com/EtherFact-Project/open-etherfact-pool/payouts"
+	"github.com/EtherFact-Project/open-etherfact-pool/policy"
+	"github.com/EtherFact-Project/open-etherfact-pool/storage"
 )
 
 type Config struct {
@@ -19,14 +17,10 @@ type Config struct {
 	Threads int `json:"threads"`
 
 	Coin  string         `json:"coin"`
-    Pplns int64          `json:"pplns"`
-	CoinName  string         `json:"coin-name"`
 	Redis storage.Config `json:"redis"`
 
 	BlockUnlocker payouts.UnlockerConfig `json:"unlocker"`
 	Payouts       payouts.PayoutsConfig  `json:"payouts"`
-
-	Exchange  exchange.ExchangeConfig `json:"exchange"`
 
 	NewrelicName    string `json:"newrelicName"`
 	NewrelicKey     string `json:"newrelicKey"`
@@ -42,6 +36,7 @@ type Proxy struct {
 	BehindReverseProxy   bool   `json:"behindReverseProxy"`
 	BlockRefreshInterval string `json:"blockRefreshInterval"`
 	Difficulty           int64  `json:"difficulty"`
+	DifficultyNiceHash   float64 `json:"difficultyNiceHash"`
 	StateUpdateInterval  string `json:"stateUpdateInterval"`
 	HashrateExpiration   string `json:"hashrateExpiration"`
 
@@ -74,4 +69,3 @@ type Upstream struct {
 	Url     string `json:"url"`
 	Timeout string `json:"timeout"`
 }
-
