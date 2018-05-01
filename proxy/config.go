@@ -2,7 +2,7 @@ package proxy
 
 import (
 	"github.com/sammy007/open-ethereum-pool/api"
-	"github.com/EtherFact-Project/open-etherfact-pool/payouts"
+	"github.com/EtherFact-Project/open-ethereum-pool/payouts"
 	"github.com/sammy007/open-ethereum-pool/policy"
 	"github.com/sammy007/open-ethereum-pool/storage"
 )
