@@ -5,8 +5,8 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/sammy007/open-ethereum-pool/rpc"
-	"github.com/sammy007/open-ethereum-pool/util"
+	"github.com/EtherFact-Project/open-ethereum-pool/rpc"
+	"github.com/EtherFact-Project/open-ethereum-pool/util"
 )
 
 // Allow only lowercase hexadecimal with 0x prefix
@@ -103,7 +103,7 @@ func (s *ProxyServer) handleSubmitRPC(cs *Session, login, id string, params []st
 	if exist {
 		log.Printf("Duplicate share from %s@%s %v", login, cs.ip, params)
 		return false, &ErrorReply{Code: 22, Message: "Duplicate share"}
-		// see https://github.com/sammy007/open-ethereum-pool/compare/master...nicehashdev:patch-1
+		// see https://github.com/EtherFact-Project/open-ethereum-pool/compare/master...nicehashdev:patch-1
 		if !ok {
 			return false, &ErrorReply{Code: 23, Message: "Invalid share"}
 		}

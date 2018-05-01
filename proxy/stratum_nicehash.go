@@ -10,7 +10,7 @@ import (
 	"time"
 	"strconv"
 
-	"github.com/sammy007/open-ethereum-pool/util"
+	"github.com/EtherFact-Project/open-ethereum-pool/util"
 	"math/rand"
 	"strings"
 	_"github.com/davecgh/go-spew/spew"

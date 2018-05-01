@@ -11,7 +11,7 @@ import (
 	"github.com/wfr/ethash-nh"
 	"github.com/ethereum/go-ethereum/common"
 
-	"github.com/sammy007/open-ethereum-pool/util"
+	"github.com/EtherFact-Project/open-ethereum-pool/util"
 )
 
 var hasher = ethash.New()
