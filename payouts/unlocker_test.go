@@ -5,8 +5,8 @@ import (
 	"os"
 	"testing"
 
-	"github.com/EtherFact-Project/open-etherfact-pool/rpc"
-	"github.com/EtherFact-Project/open-etherfact-pool/storage"
+	"github.com/sammy007/open-ethereum-pool/rpc"
+	"github.com/sammy007/open-ethereum-pool/storage"
 )
 
 func TestMain(m *testing.M) {

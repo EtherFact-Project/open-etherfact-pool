@@ -11,10 +11,10 @@ import (
 
 	"github.com/yvasiyarov/gorelic"
 
-	"github.com/EtherFact-Project/open-etherfact-pool/api"
+	"github.com/sammy007/open-ethereum-pool/api"
 	"github.com/EtherFact-Project/open-etherfact-pool/payouts"
-	"github.com/EtherFact-Project/open-etherfact-pool/proxy"
-	"github.com/EtherFact-Project/open-etherfact-pool/storage"
+	"github.com/sammy007/open-ethereum-pool/proxy"
+	"github.com/sammy007/open-ethereum-pool/storage"
 )
 
 var cfg proxy.Config

@@ -8,10 +8,10 @@ import (
 	//"encoding/hex"
 	_"github.com/davecgh/go-spew/spew"
 
-	"github.com/EtherFact-Project/ethash-nh"
+	"github.com/wfr/ethash-nh"
 	"github.com/ethereum/go-ethereum/common"
 
-	"github.com/EtherFact-Project/open-etherfact-pool/util"
+	"github.com/sammy007/open-ethereum-pool/util"
 )
 
 var hasher = ethash.New()
